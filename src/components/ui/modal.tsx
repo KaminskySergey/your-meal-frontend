@@ -6,7 +6,7 @@ interface IModal {
   children: ReactNode;
   onClose: () => void | undefined;
   className?: string;
-  isProduct: boolean
+  isProduct?: boolean
 }
 
 const rootModal = document.querySelector("#root_modal");
