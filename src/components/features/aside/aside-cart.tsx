@@ -12,12 +12,10 @@ export const AsideCart = () => {
     const cart = useCart()
     const handleToggle = () => {
         setIsOpen((pS) => !pS)
-        console.log(isOpenOrder)
     }
-    const handleOpenOrder = () => {
-        setIsOpenOrder((pS) => !pS)
-        console.log(isOpenOrder)
-    }
+    const handleOpenOrder = () => setIsOpenOrder(true);
+    const handleCloseOrder = () => setIsOpenOrder(false);
+
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -56,7 +54,7 @@ export const AsideCart = () => {
             </div>}
         </div>
         {isOpenOrder && <Modal onClose={handleOpenOrder}>
-            <OrderModal />
+            <OrderModal onClose={handleCloseOrder}/>
         </Modal>}
     </div>
 }
