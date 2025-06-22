@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../utils/utils";
 
@@ -11,7 +11,7 @@ interface IModal {
 
 const rootModal = document.querySelector("#root_modal");
 
-const Modal = ({ onClose, children, className, isProduct }: IModal): any => {
+const Modal = ({ onClose, children, className, isProduct }: IModal): null | ReactElement => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
