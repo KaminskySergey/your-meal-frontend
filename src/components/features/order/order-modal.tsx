@@ -7,6 +7,7 @@ import { fetchOrder } from "../../../redux/order/operations";
 import { useOrder, useOrderError, useOrderLoading, useOrderSuccess } from "../../../redux/order/selectors";
 import { useEffect } from "react";
 import { clearCart } from "../../../redux/cart/cart-slice";
+import { useNavigate } from "react-router-dom";
 
 export const OrderModal = () => {
     const dispatch = useAppDispatch();
@@ -15,9 +16,9 @@ export const OrderModal = () => {
     const isError = useOrderError();
     const isSuccess = useOrderSuccess();
     const order = useOrder();
-console.log(order, 'fvffv')
+    console.log(order, 'fvffv')
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -44,9 +45,9 @@ console.log(order, 'fvffv')
 
     useEffect(() => {
         if (isSuccess) {
-          dispatch(clearCart());
+            dispatch(clearCart());
         }
-      }, [isSuccess, dispatch]);
+    }, [isSuccess, dispatch]);
 
     return (
         <div className="flex justify-center items-center">
@@ -56,7 +57,7 @@ console.log(order, 'fvffv')
                 {isSuccess ? (
                     <div className="text-center">
                         <p className="text-green-600 text-lg font-semibold mb-4">Order successfully placed!</p>
-                        <Button onClick={() => window.location.reload()}>Close</Button>
+                        <Button onClick={() => navigate("/")}>Close</Button>
                     </div>
                 ) : (
                     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
