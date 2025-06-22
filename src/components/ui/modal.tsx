@@ -11,7 +11,7 @@ interface IModal {
 
 const rootModal = document.querySelector("#root_modal");
 
-const Modal = ({ onClose, children, className, isProduct }: IModal): null | JSX.Element => {
+const Modal = ({ onClose, children, className, isProduct }: IModal): any => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
