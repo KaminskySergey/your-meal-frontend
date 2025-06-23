@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { clearCart } from "../../../redux/cart/cart-slice";
 import { toast } from "react-toastify";
 import { resetOrderState } from "../../../redux/order/order-slice";
+import { useNavigate } from "react-router-dom";
 
 export const OrderModal = ({onClose}: {onClose: () => void}) => {
     const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ export const OrderModal = ({onClose}: {onClose: () => void}) => {
     const isLoading = useOrderLoading();
     const isError = useOrderError();
     const isSuccess = useOrderSuccess();
+    const navigate = useNavigate()
     console.log(isSuccess, 'gbgbgbgb')
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -53,6 +55,7 @@ export const OrderModal = ({onClose}: {onClose: () => void}) => {
             console.log(isSuccess, '1111111111')
             onClose()
             dispatch(resetOrderState())
+            navigate("/");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSuccess, dispatch]);
